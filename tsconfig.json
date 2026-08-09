@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true,
+    "paths": {
+      "@bk/constants/*": [
+        "./src/core/constants/*"
+      ],
+      "@bk/repositories/*": [
+        "./src/core/repositories/*"
+      ],
+      "@bk/security": [
+        "./src/core/security"
+      ],
+      "@bk/config/*": [
+        "./src/core/config/*"
+      ],
+      "@bk/helpers/*": [
+        "./src/core/helpers/*"
+      ],
+      "@bk/middlewares/*": [
+        "./src/core/middlewares/*"
+      ],
+      "@bk/interfaces/*": [
+        "./src/core/interfaces/*"
+      ],
+      "@bk/error-http": [
+        "./src/core/error-http"
+      ],
+    }
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
