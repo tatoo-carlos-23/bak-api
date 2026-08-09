@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  buki_api_prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "127.0.0.1:3400:3000"
+    env_file:
+      - ambient-prod.env
+    restart: always
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+
+networks:
+  vps-network:
+    external: true

@@ -1,6 +1,6 @@
-import mysql from "mysql2/promise";
+import mysql, { type PoolOptions } from "mysql2/promise";
 
-export const mysqlPool = mysql.createPool({
+const options: PoolOptions = {
   host: process.env.MYSQL_HOST,
   port: Number(process.env.MYSQL_PORT),
   database: process.env.MYSQL_DATABASE,
@@ -9,7 +9,9 @@ export const mysqlPool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-});
+};
+
+export const mysqlPool = mysql.createPool({ ...options });
 
 export const checkDatabaseConnection = async () => {
   const connection = await mysqlPool.getConnection();
