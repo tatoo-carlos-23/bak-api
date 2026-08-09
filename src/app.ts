@@ -1,5 +1,9 @@
 import express from "express";
-import { AuthenticationModule, ServicesModule } from "./modules";
+import {
+  AuthenticationModule,
+  SchedulesModule,
+  ServicesModule,
+} from "./modules";
 import { errorMiddleware } from "@bk/error-http";
 import { traceIdMiddleware } from "@bk/middlewares/trace.middleware";
 
@@ -11,6 +15,7 @@ app.use(traceIdMiddleware);
 
 app.use("/api", AuthenticationModule());
 app.use("/api", ServicesModule());
+app.use("/api", SchedulesModule());
 
 app.use(errorMiddleware);
 
