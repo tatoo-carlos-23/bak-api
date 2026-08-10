@@ -7,3 +7,7 @@ export interface IListSchedules {
   service_type_id: number;
   service_type_name: string;
 }
+
+export interface ICheckDateInRange {
+  id: number;
+}

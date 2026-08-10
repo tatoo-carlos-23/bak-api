@@ -2,18 +2,34 @@ import { bookingRepository } from "@bk/repositories/bookings";
 import { AppError } from "@bk/error-http";
 import type { JwtPayload } from "@bk/security";
 import { listBookingMapper } from "../mappers/bookings.mapper";
+import { scheduleRepository } from "@bk/repositories/schedules";
 
 const create = async (
   date: string,
   scheduleId: number,
   jwtPayload: JwtPayload,
 ) => {
-  const booking = await bookingRepository.checkAvailability(date, scheduleId);
+  const dateInRange = await scheduleRepository.checkDateInRange(
+    date,
+    scheduleId,
+  );
 
-  if (booking) {
+  if (!dateInRange) {
     throw new AppError(404, {
-      xMessage: `No se encuntra disponible en la fecha y hora seleccionada`,
-      xCode: "NOT_FOUND",
+      xMessage: `La fecha no se encuentra en el rango permitido del horario`,
+      xCode: "ERROR_RANGE",
+    });
+  }
+
+  const bookingAvailability = await bookingRepository.checkAvailability(
+    date,
+    scheduleId,
+  );
+
+  if (bookingAvailability) {
+    throw new AppError(404, {
+      xMessage: `La hora y fecha seleccionada ya se encuentra ocupada.`,
+      xCode: "NOT_AVAILABLE",
     });
   }
 

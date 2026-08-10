@@ -6,8 +6,8 @@ export const checkAvailability = async (
   scheduleId: number,
 ): Promise<ICheckAvailability | null> => {
   const [queryResult] = await mysqlPool.execute(
-    `SELECT boo.id FROM bookings AS boo INNER JOIN schedules as sch ON sch.id = boo.schedule_id WHERE (? BETWEEN sch.start_date AND sch.end_date) AND boo.schedule_id = ? LIMIT 1;`,
-    [date, scheduleId],
+    `SELECT boo.id FROM bookings AS boo INNER JOIN schedules as sch ON sch.id = boo.schedule_id INNER JOIN services as ser ON ser.id = sch.service_id WHERE (?  BETWEEN sch.start_date AND sch.end_date) AND (DATE_ADD(?, INTERVAL ser.duration MINUTE) BETWEEN sch.start_date AND sch.end_date) AND boo.schedule_id = ? LIMIT 1;`,
+    [date, date, scheduleId],
   );
   return Array.isArray(queryResult)
     ? (queryResult?.[0] as ICheckAvailability)
