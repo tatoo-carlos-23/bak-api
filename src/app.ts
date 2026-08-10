@@ -1,6 +1,7 @@
 import express from "express";
 import {
   AuthenticationModule,
+  BookingsModule,
   SchedulesModule,
   ServicesModule,
 } from "./modules";
@@ -16,6 +17,7 @@ app.use(traceIdMiddleware);
 app.use("/api", AuthenticationModule());
 app.use("/api", ServicesModule());
 app.use("/api", SchedulesModule());
+app.use("/api", BookingsModule());
 
 app.use(errorMiddleware);
 
