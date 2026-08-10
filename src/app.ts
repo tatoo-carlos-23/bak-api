@@ -6,10 +6,12 @@ import {
   ServicesModule,
 } from "./modules";
 import { errorMiddleware } from "@bk/error-http";
+import { corsMiddleware } from "@bk/middlewares/cors.middleware";
 import { traceIdMiddleware } from "@bk/middlewares/trace.middleware";
 
 const app = express();
 
+app.use(corsMiddleware);
 app.use(express.json());
 
 app.use(traceIdMiddleware);
