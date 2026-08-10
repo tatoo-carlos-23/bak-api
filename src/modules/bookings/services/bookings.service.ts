@@ -1,6 +1,7 @@
 import { bookingRepository } from "@bk/repositories/bookings";
 import { AppError } from "@bk/error-http";
 import type { JwtPayload } from "@bk/security";
+import { listBookingMapper } from "../mappers/bookings.mapper";
 
 const create = async (
   date: string,
@@ -22,8 +23,8 @@ const create = async (
 };
 
 const getAll = async (jwtPayload: JwtPayload) => {
-  const data = await bookingRepository.getAll(jwtPayload.id);
-  return { data };
+  const list = await bookingRepository.getAll(jwtPayload.id);
+  return { data: listBookingMapper(list) };
 };
 
 export const bookingsService = { create, getAll };
