@@ -1,1 +1,1 @@
-export { listServiceMapper } from "./services.mapper";
+export { listBookingMapper } from "./bookings.mapper";
