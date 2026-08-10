@@ -7,5 +7,6 @@ dist
 .idea
 
 .env
+.env.template
 .env.dev
 .env.prod
