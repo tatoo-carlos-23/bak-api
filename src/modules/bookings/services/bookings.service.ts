@@ -12,8 +12,8 @@ const create = async (
 
   if (booking) {
     throw new AppError(404, {
-      xCode: `No se encuntra disponible en la fecha y hora seleccionada`,
-      xMessage: "NOT_FOUND",
+      xMessage: `No se encuntra disponible en la fecha y hora seleccionada`,
+      xCode: "NOT_FOUND",
     });
   }
 
